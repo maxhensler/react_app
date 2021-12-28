@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
 
@@ -19,33 +19,12 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-const [user] = useAuthState(auth);
-
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-      </header>
-      <section>{user ? <ChatRoom/> : <SignIn />}</section>
+      <header className="App-header">Test</header>
     </div>
   );
-}
-
-function SignIn() {
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInwithPopup(provider);
-  }
-  return (
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
-  )
-}
-
-function SignOut() {
-  return auth.currentUser && (
-    <button onClick={() => auth.signOut()}>Sign Out</button>
-  )
 }
 
 export default App;
